@@ -1,4 +1,4 @@
-import { Pool, QueryResult } from "pg";
+import { Pool } from "pg";
 
 const { PGUSER, PGHOST, PGPASSWORD, PGPORT, PGDATABASE }: any = process.env;
 

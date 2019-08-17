@@ -26,20 +26,7 @@ export const signUp = async (req: Request, res: Response) => {
     }
 }
 
-export const login = async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-    const query = "SELECT email, password FROM test WHERE email = $1";
-    const data = [email];
-
-    try {
-        const { rows } = await db.query(query, data);
-        const passwordMatch = await bcrypt.compare(password, rows[0].password);
-        if (passwordMatch) {
-            return res.status(200).json("ok");
-        } else {
-            return res.status(400).json("not ok");
-        }
-    } catch (error) {
-        return res.json("not ok");
-    }
+export const signIn = async (req: Request, res: Response) => {
+    console.log(req);
+    return res.json("ok");
 }
