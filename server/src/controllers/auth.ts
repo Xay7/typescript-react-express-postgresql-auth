@@ -3,6 +3,7 @@ import db from "../db/db";
 import bcrypt from "bcryptjs";
 
 export const signUp = async (req: Request, res: Response) => {
+
     const { username, password, email } = req.body;
 
     const salt = await bcrypt.genSalt(10);
@@ -15,18 +16,17 @@ export const signUp = async (req: Request, res: Response) => {
     const data = [username, hashedPassword, email];
 
     try {
-        const ress = await db.query(query, data);
+        await db.query(query, data);
         return res.status(200).json("ok");
     } catch (error) {
         // 23505 UNIQUE VIOLATION
-        if (error.code === 23505) {
-            return res.json("email arleady exists")
+        if (error.code === "23505") {
+            return res.status(400).json("email arleady exists")
         }
-        return res.json("unknown error");
+        return res.status(400).json("unknown error");
     }
 }
 
 export const signIn = async (req: Request, res: Response) => {
-    console.log(req);
     return res.json("ok");
 }

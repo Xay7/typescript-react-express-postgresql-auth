@@ -1,18 +1,9 @@
 import { Pool } from "pg";
 
-const { PGUSER, PGHOST, PGPASSWORD, PGPORT, PGDATABASE }: any = process.env;
-
-const pool = new Pool({
-    user: PGUSER,
-    password: PGPASSWORD,
-    host: PGHOST,
-    port: PGPORT,
-    database: PGDATABASE
-});
-
+const pool = new Pool();
 
 const db = {
-    query: async (text: string, params: Array<any>) => {
+    query: async (text: string, params?: Array<any>) => {
         const client = await pool.connect()
         let res
         try {

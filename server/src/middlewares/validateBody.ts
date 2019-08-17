@@ -5,7 +5,7 @@ export const validateBody = (schema: Schema) => {
     return (req: Request, res: Response, next: NextFunction) => {
         const result = Joi.validate(req.body, schema);
         if (result.error) {
-            res.status(400).json(result);
+            return res.status(400).json(result);
         }
         next();
     }
